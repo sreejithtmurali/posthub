@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -131,7 +130,7 @@ class AddnewView extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16.h),
                           child: CustomTextFormField(
                             validator: (value) {
-                              if (value == null || int.parse(value)<500) {
+                              if (value == null || int.parse(value) < 500) {
                                 return 'Please enter sufficient Budget';
                               }
                               return null;
@@ -332,7 +331,6 @@ class AddnewView extends StatelessWidget {
                         SizedBox(height: 8.v),
                         Column(
                           children: [
-
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 16.h),
                               child: Column(
@@ -353,7 +351,6 @@ class AddnewView extends StatelessWidget {
                                     },
                                     controller: model.addKeywordsController,
                                     hintText: "Add upto 10 Keywords",
-
                                     contentPadding: EdgeInsets.all(8.h),
                                   )),
                                   SizedBox(height: 3.v),
@@ -374,7 +371,9 @@ class AddnewView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 260.v,)
+                        SizedBox(
+                          height: 260.v,
+                        )
                       ],
                     ),
                   ),
@@ -401,18 +400,18 @@ class TakePic extends ViewModelWidget<AddnewViewModel> {
     getImage() async {
       final XFile? pickedImage =
           await _picker.pickImage(source: ImageSource.gallery);
-
+      print(pickedImage!.path.toString());
       _image = File(pickedImage!.path);
       viewModel.UpdateFile(_image);
 
       var imagefile = FirebaseStorage.instance
           .ref()
-          .child("Add_Thumbnail")
-          .child("/pic.jpg");
+          .child("post_thumbnail")
+          .child("/postpic${_image}.jpg");
       UploadTask task = imagefile.putFile(_image!);
       TaskSnapshot snapshot = await task;
       url = await snapshot.ref.getDownloadURL();
-
+print("url::::${url.toString()}");
       viewModel.UpdateFie(url);
 
       // print(file);
@@ -430,11 +429,11 @@ class TakePic extends ViewModelWidget<AddnewViewModel> {
                 : Image.file(viewModel.file!),
             height: 200.v,
             width: 329.h,
-           decoration: BoxDecoration(
-             borderRadius: BorderRadius.circular(
-               10.h,
-             ),
-           ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                10.h,
+              ),
+            ),
             alignment: Alignment.center,
           ),
           CustomOutlinedButton(

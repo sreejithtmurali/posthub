@@ -36,7 +36,7 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> Login() async {
     User? user = await _handleSignIn();
-    print('dataaaaaaaaaaaaaa${user!.displayName.toString()}');
+    print('dataaaaaaaaaaaaaa${user?.displayName.toString()}');
     SharedPreferences pref =await SharedPreferences.getInstance();
 
     if (user != null) {

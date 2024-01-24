@@ -48,6 +48,11 @@ class AddnewViewModel extends BaseViewModel {
 
     setBusy(_isBusy); // Set the ViewModel as not busy
   }
+  init(){
+    if(_file==null){
+      _file= getImageFileFromAsset('assets/images/image_not_found.png') as File?;
+    }
+  }
 
   TextEditingController addCaptionValueController = TextEditingController();
 
@@ -71,7 +76,8 @@ class AddnewViewModel extends BaseViewModel {
   }
 void validateandpush(){
     if(formKey.currentState!.validate()){
-      uploadFile(addCaptionValueController.text, cat, addDescriptionController.text, locationController.text, budgetctrlr.text, sex, values.end.toString(), url, values.start.toString(), addKeywordsController.text, startdateController.text, enddateController.text);
+      print("uploading");
+      uploadFile(addCaptionValueController.text, cat, addDescriptionController.text, locationController.text, budgetctrlr.text, sex, values.end.toString(), url, values.start.toString(), addKeywordsController.text, startdateController.text, enddateController.text,"0","000");
     }
 }
   void setrange(SfRangeValues values1) {
@@ -102,30 +108,33 @@ void validateandpush(){
   var url;
   UpdateFile(var u)
   {
-
+print("updating file");
     _file=u;
+    notifyListeners();
   }
   UpdateFie(var u)
-  {
+  {print("updating url");
 
     url=u;
+    notifyListeners();
   }
 
 
-  uploadFile(String caption, String addcategory, String discription,String location,String budget, String gender, String ageend,var url,String agestart,String keywords,String startdate,String enddate) async {
-    DatabaseReference db_Ref = FirebaseDatabase.instance.ref().child('adds');
-    void toggleProgress() {
-      _isBusy = !_isBusy;
-      notifyListeners();
-    }
-    showDialogue();
+  uploadFile(String caption, String addcategory, String discription,String location,String budget, String gender, String ageend,var url,String agestart,String keywords,String startdate,String enddate,String totalviews,String moneyspent) async {
+    DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('myadds');
+toggleProgress() ;
+print("toggle changed");
 
+    print("dialogue ");
     try {
+      print("try ::::::::");    print("url ::::::::${url}");
+
       if (url != null) {
-        Map<String, dynamic> adds = {
+        print("enteringtry ::::::::");
+        Map<String, dynamic> myadds = {
           'caption': caption,
           'addcategory': addcategory,
-          "discription":discription,
+          'discription':discription,
           'budget': budget,
           'startdate': startdate,
           'enddate': enddate,
@@ -134,23 +143,21 @@ void validateandpush(){
           'ageend': ageend,
           'rejected': false,
           'gender': gender,
-          "keywords":keywords,
+          'keywords':keywords,
           'url': url,
-
+          'totalviews': totalviews,
+          'moneyspent': moneyspent,
         };
-
-
-        db_Ref!.push().set(adds).whenComplete(() {
-          void toggleProgress() {
-            _isBusy = !_isBusy;
-            notifyListeners();
-          }
+        print("try to push::::::::${myadds.toString()}");
+        showDialogue();
+        dbRef!.push().set(myadds).whenComplete(() {
+          toggleProgress() ;
           //code to navigate to login page
           navigationService.pushNamedAndRemoveUntil(Routes.dashBoardView);
         });
       }
     } on Exception catch (e) {
-      print(e);
+      print(e.toString());
     }
   }
 

@@ -15,9 +15,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: FirebaseOptions(
       apiKey: "AIzaSyCKj6I6hgGBepOz1UtJGe2ZsiChuCH7PpM",
-      appId: "1:429311905373:android:525e3b7f37deecf1bcc7b4",
+      appId: "1:429311905373:android:58e646f8992123f8bcc7b4",
       messagingSenderId: "429311905373",
       projectId: "posthub-44ebb",
+        storageBucket:"posthub-44ebb.appspot.com"
     ),
   );
   runApp(MultiProvider(

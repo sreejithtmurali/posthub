@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:posthub/app/size_utils.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,6 +24,7 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onViewModelReady: (model) {
         model.init();
+        model.fetchDataFromFirebase();
       },
       onDispose: (model) {},
       builder: (context, viewModel, child) {
@@ -29,26 +33,27 @@ class HomeView extends StatelessWidget {
             child: Scaffold(
                 body: Container(
                     width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 28.v),
+                    padding: EdgeInsets.symmetric(vertical: 28),
                     decoration: AppDecoration.fillGray,
                     child: SingleChildScrollView(
                         child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Column(children: [
                               Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 9.h),
+                                  padding: EdgeInsets.symmetric(horizontal: 9),
                                   child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        CustomImageView(
-                                            imagePath: ImageConstant.imgGroup2,
-                                            height: 33.v,
-                                            width: 104.h,
-                                            margin: EdgeInsets.only(bottom: 10.v)),
+                                      SvgPicture.asset(
+                                      "assets/images/img_group_2.svg",
+
+                                            height: 33,
+                                            width: 104,
+                                           fit: BoxFit.fill,),
                                         Spacer(),
                                         Padding(
-                                            padding: EdgeInsets.only(top: 5.v, bottom: 3.v),
+                                            padding: EdgeInsets.only(top: 5, bottom: 3),
                                             child: Column(children: [
                                               Align(
                                                   alignment: Alignment.centerRight,
@@ -66,17 +71,17 @@ class HomeView extends StatelessWidget {
                                             imagePath:"${viewModel.photoURL}",
                                             height: 40.adaptSize,
                                             width: 40.adaptSize,
-                                            radius: BorderRadius.circular(20.h),
-                                            margin: EdgeInsets.only(left: 4.h, top: 4.v))
+                                            radius: BorderRadius.circular(20),
+                                            margin: EdgeInsets.only(left: 4, top: 4))
                                       ])),
-                              SizedBox(height: 32.v),
+                              SizedBox(height: 32),
                               Align(
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
-                                      padding: EdgeInsets.only(left: 7.h),
+                                      padding: EdgeInsets.only(left: 7),
                                       child: Text("Quick Access",
                                           style: theme.textTheme.titleMedium))),
-                              SizedBox(height: 12.v),
+                              SizedBox(height: 12),
                               Row(
                                 children: [
                                   InkWell(
@@ -84,7 +89,7 @@ class HomeView extends StatelessWidget {
                                       viewModel.Addpage();
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.all(8.h),
+                                      padding: EdgeInsets.all(8),
                                       decoration:
                                           AppDecoration.fillGray20001.copyWith(
                                         borderRadius:
@@ -100,11 +105,11 @@ class HomeView extends StatelessWidget {
                                               BorderRadiusStyle.roundedBorder10,
                                         ),
                                         child: Container(
-                                          height: 120.v,
-                                          width: 96.h,
+                                          height: 130,
+                                          width: 96,
                                           padding: EdgeInsets.symmetric(
-                                            horizontal: 30.h,
-                                            vertical: 33.v,
+                                            horizontal: 30,
+                                            vertical: 33,
                                           ),
                                           decoration:
                                               AppDecoration.fillPrimary.copyWith(
@@ -126,7 +131,7 @@ class HomeView extends StatelessWidget {
                                                 alignment: Alignment.bottomCenter,
                                                 child: Padding(
                                                   padding: EdgeInsets.only(
-                                                      bottom: 1.v),
+                                                      bottom: 1),
                                                   child: Text(
                                                     "New",
                                                     style: CustomTextStyles
@@ -141,16 +146,16 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 110.v,
+                                    width: 110,
                                   ),
                                   Expanded(
                                     child: Container(
                                       child: Padding(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 8.h),
+                                              horizontal: 8),
                                           child: CarouselSlider.builder(
                                               options: CarouselOptions(
-                                                  height: 150.v,
+                                                  height: 150,
                                                   initialPage: 0,
                                                   autoPlay: true,
                                                   viewportFraction: 1.0,
@@ -161,18 +166,22 @@ class HomeView extends StatelessWidget {
                                                       (index, reason) {
                                                     sliderIndex = index;
                                                   }),
-                                              itemCount: 2,
+                                              itemCount: viewModel.postlist.length??2,
                                               itemBuilder:
                                                   (context, index, realIndex) {
                                                 return Container(
-                                                  color: Colors.blue,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  image:DecorationImage(image: NetworkImage("${viewModel.postlist[index].url}"))
+                                                ),
+
                                                 );
                                               })),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 5.v),
+                              SizedBox(height: 5),
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: Row(
@@ -180,14 +189,14 @@ class HomeView extends StatelessWidget {
                                       children: [
                                         Padding(
                                             padding: EdgeInsets.only(
-                                                top: 2.v, bottom: 3.v),
+                                                top: 2, bottom: 3),
                                             child: Text(
                                                 "${sliderIndex + 1}/2 Campaigns",
                                                 style: theme
                                                     .textTheme.labelLarge)),
                                         Container(
-                                            height: 24.v,
-                                            margin: EdgeInsets.only(left: 59.h),
+                                            height: 24,
+                                            margin: EdgeInsets.only(left: 59),
                                             child: AnimatedSmoothIndicator(
                                                 activeIndex: sliderIndex,
                                                 count: 2,
@@ -197,21 +206,22 @@ class HomeView extends StatelessWidget {
                                                         .colorScheme.primary,
                                                     dotColor: theme.colorScheme
                                                         .secondaryContainer,
-                                                    dotHeight: 8.v,
-                                                    dotWidth: 8.h)))
+                                                    dotHeight: 8,
+                                                    dotWidth: 8)))
                                       ])),
-                              SizedBox(height: 37.v),
+                              SizedBox(height: 37),
                               Align(
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
-                                      padding: EdgeInsets.only(left: 7.h),
+                                      padding: EdgeInsets.only(left: 7),
                                       child: Text("My Ads.",
                                           style: theme.textTheme.titleMedium))),
                               Container(
-                                height: 800.h,
+                                // height: 728,
                                 child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: 5,
+                                  shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: viewModel.postlist.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return GestureDetector(
@@ -222,22 +232,23 @@ class HomeView extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(top: 16.0),
                                         child: Container(
+                                          height: 364,
                                           child: Column(
                                             children: [
-                                              CustomImageView(
-                                                  imagePath: ImageConstant
-                                                      .imgRectangle6,
-                                                  height: 336.v,
-                                                  width: 328.h,
-                                                  radius: BorderRadius.circular(
-                                                      10.h)),
-                                              SizedBox(height: 8.v),
+                                              Image.network(
+                                                "${viewModel.postlist[index].url}",
+
+                                                  height: 336,
+                                                  width: 328,
+                                                fit: BoxFit.fill,
+                                                 ),
+                                              SizedBox(height: 8),
                                               Container(
                                                 height: 20,
                                                 child: Padding(
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 8.h),
+                                                            horizontal: 8),
                                                     child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -251,19 +262,19 @@ class HomeView extends StatelessWidget {
                                                               margin: EdgeInsets
                                                                   .only(
                                                                       bottom:
-                                                                          2.v),
+                                                                          2),
                                                               decoration: BoxDecoration(
                                                                   color: appTheme
                                                                       .redA700,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              8.h))),
+                                                                              8))),
                                                           Padding(
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       left:
-                                                                          8.h),
+                                                                          8),
                                                               child: RichText(
                                                                   text: TextSpan(
                                                                       children: [
@@ -282,13 +293,18 @@ class HomeView extends StatelessWidget {
                                                                       TextAlign
                                                                           .left)),
                                                           Spacer(),
-                                                          Text("Remove",
-                                                              style: CustomTextStyles
-                                                                  .labelLargeBold
-                                                                  .copyWith(
-                                                                      decoration:
-                                                                          TextDecoration
-                                                                              .underline))
+                                                          InkWell(
+                                                            onTap: (){
+                                                              viewModel.deleteItem("${viewModel.postlist[index].url}",index);
+                                                            },
+                                                            child: Text("Remove",
+                                                                style: CustomTextStyles
+                                                                    .labelLargeBold
+                                                                    .copyWith(
+                                                                        decoration:
+                                                                            TextDecoration
+                                                                                .underline)),
+                                                          )
                                                         ])),
                                               )
                                             ],
@@ -310,6 +326,6 @@ class HomeView extends StatelessWidget {
 
   /// Navigates to the advDetailsOneScreen when the action is triggered.
   onTapImgImage(BuildContext context) {
-    // Navigator.pushNamed(context, Route.h);
+    // Navigator.pushNamed(context, Route);
   }
 }
