@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:posthub/app/size_utils.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../app/app.router.dart';
 import '../../app/image_constant.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/custom_button_style.dart';
@@ -13,17 +14,25 @@ import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form_field.dart';
+import '../home/user.dart';
 import 'detais_viewmodel.dart';
 
 class DetailsView extends StatelessWidget {
-  DetailsView({Key? key}) : super(key: key);
+ late Post post;
+
+ DetailsView({required this.post});
+
 
   @override
   Widget build(BuildContext context) {
 
     return ViewModelBuilder<DetailsViewModel>.reactive(
 
-        viewModelBuilder: ()=>DetailsViewModel(),
+        viewModelBuilder: (){
+          final arguments = ModalRoute.of(context)!.settings.arguments as DetailsViewArguments;
+          post = arguments.post;
+
+          return DetailsViewModel(post: post);},
         onViewModelReady: (model){
 
         },
@@ -44,14 +53,14 @@ class DetailsView extends StatelessWidget {
                                 padding: EdgeInsets.only(right: 2.h),
                                 child: CustomTextFormField(
                                     controller: model.frameEighteenController,
-                                    hintText: "Make your walls next level")),
+                                    hintText: "${post.caption}")),
                             SizedBox(height: 16.v),
                             Padding(
                                 padding: EdgeInsets.only(right: 2.h),
                                 child: CustomTextFormField(
                                     controller: model.frameNineteenController,
                                     hintText:
-                                    "Make awesomeness in your room office space or place you wish we provide you custom original drawing ",
+                                    "${post.discription}",
                                     textInputAction: TextInputAction.done,
                                     maxLines: 4,
                                     contentPadding: EdgeInsets.all(8.h))),
@@ -103,7 +112,7 @@ class DetailsView extends StatelessWidget {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(height: 10.v),
           CustomImageView(
-              imagePath: ImageConstant.imgRectangle7,
+              imagePath: post.url,
               height: 304.v,
               width: 296.h,
               radius: BorderRadius.circular(10.h)),
@@ -124,7 +133,7 @@ class DetailsView extends StatelessWidget {
                             margin: EdgeInsets.only(top: 1.v))),
                     Padding(
                         padding: EdgeInsets.only(left: 3.h),
-                        child: Text("1K",
+                        child: Text("${post.totalviews}",
                             style: CustomTextStyles.labelLargeGray400))
                   ]),
                   SizedBox(height: 5.v),
@@ -138,13 +147,13 @@ class DetailsView extends StatelessWidget {
                                 height: 16.adaptSize,
                                 width: 16.adaptSize,
                                 margin: EdgeInsets.only(bottom: 2.v)),
-                            Text("326",
+                            Text("${post.moneyspent}",
                                 style: CustomTextStyles.labelLargeGray400)
                           ])),
                   SizedBox(height: 1.v),
                   Padding(
                       padding: EdgeInsets.only(left: 3.h),
-                      child: Text("₹650",
+                      child: Text("₹${post.budget}",
                           style: CustomTextStyles.labelLargeGray400))
                 ]),
                 _buildExtend(context)

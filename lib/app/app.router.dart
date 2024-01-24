@@ -11,10 +11,11 @@ import 'package:posthub/Ui/Addnew/addnew_view.dart' as _i7;
 import 'package:posthub/Ui/dashboard/dashboard.dart' as _i5;
 import 'package:posthub/Ui/details/details_view.dart' as _i6;
 import 'package:posthub/Ui/home/home_view.dart' as _i3;
+import 'package:posthub/Ui/home/user.dart' as _i9;
 import 'package:posthub/Ui/login/login_view.dart' as _i4;
 import 'package:posthub/Ui/Splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i10;
 
 class Routes {
   static const splashView = '/';
@@ -105,11 +106,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i6.DetailsView: (data) {
-      final args = data.getArgs<DetailsViewArguments>(
-        orElse: () => const DetailsViewArguments(),
-      );
+      final args = data.getArgs<DetailsViewArguments>(nullOk: false);
       return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => _i6.DetailsView(key: args.key),
+        builder: (context) => _i6.DetailsView(post: args.post),
         settings: data,
       );
     },
@@ -220,24 +219,24 @@ class DashBoardViewArguments {
 }
 
 class DetailsViewArguments {
-  const DetailsViewArguments({this.key});
+  const DetailsViewArguments({required this.post});
 
-  final _i8.Key? key;
+  final _i9.Post post;
 
   @override
   String toString() {
-    return '{"key": "$key"}';
+    return '{"post": "$post"}';
   }
 
   @override
   bool operator ==(covariant DetailsViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key;
+    return other.post == post;
   }
 
   @override
   int get hashCode {
-    return key.hashCode;
+    return post.hashCode;
   }
 }
 
@@ -263,7 +262,7 @@ class AddnewViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+extension NavigatorStateExtension on _i10.NavigationService {
   Future<dynamic> navigateToSplashView({
     _i8.Key? key,
     int? routerId,
@@ -329,7 +328,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> navigateToDetailsView({
-    _i8.Key? key,
+    required _i9.Post post,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -337,7 +336,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.detailsView,
-        arguments: DetailsViewArguments(key: key),
+        arguments: DetailsViewArguments(post: post),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -425,7 +424,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> replaceWithDetailsView({
-    _i8.Key? key,
+    required _i9.Post post,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -433,7 +432,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.detailsView,
-        arguments: DetailsViewArguments(key: key),
+        arguments: DetailsViewArguments(post: post),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

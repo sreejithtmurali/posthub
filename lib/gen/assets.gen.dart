@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/google.png
+  AssetGenImage get google => const AssetGenImage('assets/images/google.png');
+
   /// File path: assets/images/image_not_found.png
   AssetGenImage get imageNotFound =>
       const AssetGenImage('assets/images/image_not_found.png');
@@ -91,8 +94,12 @@ class $AssetsImagesGen {
   String get imgVectorBlack90022x18 =>
       'assets/images/img_vector_black_900_22x18.svg';
 
+  /// File path: assets/images/meta.png
+  AssetGenImage get meta => const AssetGenImage('assets/images/meta.png');
+
   /// List of all assets
   List<dynamic> get values => [
+        google,
         imageNotFound,
         imgArrowDown,
         imgBiEyeFill,
@@ -114,7 +121,8 @@ class $AssetsImagesGen {
         imgUserPrimarycontainer,
         imgVector,
         imgVectorBlack900,
-        imgVectorBlack90022x18
+        imgVectorBlack90022x18,
+        meta
       ];
 }
 
