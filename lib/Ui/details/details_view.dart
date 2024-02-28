@@ -34,13 +34,20 @@ class DetailsView extends StatelessWidget {
 
           return DetailsViewModel(post: post);},
         onViewModelReady: (model){
+          model.init();
 
         },
         builder:( context,model,child){
           return   SafeArea(
               child: Scaffold(
                   resizeToAvoidBottomInset: false,
-                  appBar: _buildAppBar(context),
+                  appBar: CustomAppBar(
+                      leadingWidth: 56.h,
+                      leading: AppbarLeadingIconbutton(
+                          imagePath:model.photoURL ,
+                          margin: EdgeInsets.only(left: 16.h, top: 8.v, bottom: 8.v)),
+                      centerTitle: true,
+                      title: AppbarTitle(text: "Advertisement  Status")),
                   body: Container(
                       width: double.maxFinite,
                       padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 13.v),
@@ -82,15 +89,7 @@ class DetailsView extends StatelessWidget {
         });
   }
   /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-        leadingWidth: 56.h,
-        leading: AppbarLeadingIconbutton(
-            imagePath: ImageConstant.imgArrowDown,
-            margin: EdgeInsets.only(left: 16.h, top: 8.v, bottom: 8.v)),
-        centerTitle: true,
-        title: AppbarTitle(text: "Advertisement  Status"));
-  }
+
 
   /// Section Widget
   Widget _buildExtend(BuildContext context) {
