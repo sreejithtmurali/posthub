@@ -15,6 +15,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
 
+  /// File path: assets/images/home.svg
+  String get home => 'assets/images/home.svg';
+
   /// File path: assets/images/image_not_found.png
   AssetGenImage get imageNotFound =>
       const AssetGenImage('assets/images/image_not_found.png');
@@ -53,18 +56,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_ic_round_home.svg
   String get imgIcRoundHome => 'assets/images/img_ic_round_home.svg';
 
-  /// File path: assets/images/img_rectangle_3.png
-  AssetGenImage get imgRectangle3 =>
-      const AssetGenImage('assets/images/img_rectangle_3.png');
-
-  /// File path: assets/images/img_rectangle_5.png
-  AssetGenImage get imgRectangle5 =>
-      const AssetGenImage('assets/images/img_rectangle_5.png');
-
-  /// File path: assets/images/img_rectangle_6.png
-  AssetGenImage get imgRectangle6 =>
-      const AssetGenImage('assets/images/img_rectangle_6.png');
-
   /// File path: assets/images/img_rectangle_7.png
   AssetGenImage get imgRectangle7 =>
       const AssetGenImage('assets/images/img_rectangle_7.png');
@@ -72,10 +63,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_rectangle_7_304x329.png
   AssetGenImage get imgRectangle7304x329 =>
       const AssetGenImage('assets/images/img_rectangle_7_304x329.png');
-
-  /// File path: assets/images/img_rectangle_8.png
-  AssetGenImage get imgRectangle8 =>
-      const AssetGenImage('assets/images/img_rectangle_8.png');
 
   /// File path: assets/images/img_user.svg
   String get imgUser => 'assets/images/img_user.svg';
@@ -90,16 +77,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_vector_black_900.svg
   String get imgVectorBlack900 => 'assets/images/img_vector_black_900.svg';
 
-  /// File path: assets/images/img_vector_black_900_22x18.svg
-  String get imgVectorBlack90022x18 =>
-      'assets/images/img_vector_black_900_22x18.svg';
-
   /// File path: assets/images/meta.png
   AssetGenImage get meta => const AssetGenImage('assets/images/meta.png');
 
   /// List of all assets
   List<dynamic> get values => [
         google,
+        home,
         imageNotFound,
         imgArrowDown,
         imgBiEyeFill,
@@ -111,17 +95,12 @@ class $AssetsImagesGen {
         imgGroup16,
         imgGroup2,
         imgIcRoundHome,
-        imgRectangle3,
-        imgRectangle5,
-        imgRectangle6,
         imgRectangle7,
         imgRectangle7304x329,
-        imgRectangle8,
         imgUser,
         imgUserPrimarycontainer,
         imgVector,
         imgVectorBlack900,
-        imgVectorBlack90022x18,
         meta
       ];
 }

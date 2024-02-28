@@ -4,7 +4,7 @@ class ImageConstant {
 
   // Onboard images
   static String imgGroup1 = '$imagePath/img_group_1.png';
-
+  static String homeicon = '$imagePath/home.png';
   static String imgFlatcoloriconsgoogle =
       '$imagePath/img_flatcoloriconsgoogle.svg';
 

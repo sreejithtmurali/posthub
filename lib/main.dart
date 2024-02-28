@@ -12,6 +12,7 @@ import 'app/app.router.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+
   await Firebase.initializeApp(
     options: FirebaseOptions(
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
        return MaterialApp(
+
          debugShowCheckedModeBanner: false,
           onGenerateRoute: StackedRouter().onGenerateRoute,
           navigatorKey: StackedService.navigatorKey,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:posthub/Ui/google/google_view.dart';
 import 'package:posthub/Ui/home/home_view.dart';
+import 'package:posthub/Ui/meta/meta_view.dart';
 import 'package:posthub/app/size_utils.dart';
 import 'package:stacked/stacked.dart';
 
@@ -50,13 +52,11 @@ class DashBoardView extends StatelessWidget {
       case BottomBarEnum.Icroundhome:
         return Routes.homeView;
       case BottomBarEnum.Vector:
-        return "/";
+        return Routes.googleView;
       case BottomBarEnum.Vectorblack900:
-        return "/";
-      case BottomBarEnum.Vectorblack90022x18:
-        return "/";
-      default:
-        return "/";
+        return Routes.metaView;
+
+        // TODO: Handle this case.
     }
   }
 
@@ -65,6 +65,10 @@ class DashBoardView extends StatelessWidget {
     switch (currentRoute) {
       case Routes.homeView:
         return HomeView();
+      case Routes.metaView:
+        return MetaView();
+      case Routes.googleView:
+        return GoogleView();
       default:
         return DefaultWidget();
     }

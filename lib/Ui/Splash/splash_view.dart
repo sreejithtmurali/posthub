@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:posthub/Ui/Splash/splash_viewmodel.dart';
 import 'package:posthub/core/app_export.dart';
 import 'package:stacked/stacked.dart';
@@ -19,12 +20,14 @@ class SplashView extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               body: Center(
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgGroup2,
+                child: SvgPicture.asset(
+                  "assets/images/img_group_2.svg",
+
                   height: 51.v,
                   width: 161.h,
-                  alignment: Alignment.center,
-                ),
+                  fit: BoxFit.fill,)
+
+
               ),
             ),
           );

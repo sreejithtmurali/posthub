@@ -5,17 +5,19 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i10;
 import 'package:flutter/material.dart';
 import 'package:posthub/Ui/Addnew/addnew_view.dart' as _i7;
 import 'package:posthub/Ui/dashboard/dashboard.dart' as _i5;
 import 'package:posthub/Ui/details/details_view.dart' as _i6;
+import 'package:posthub/Ui/google/google_view.dart' as _i8;
 import 'package:posthub/Ui/home/home_view.dart' as _i3;
-import 'package:posthub/Ui/home/user.dart' as _i9;
+import 'package:posthub/Ui/home/user.dart' as _i11;
 import 'package:posthub/Ui/login/login_view.dart' as _i4;
+import 'package:posthub/Ui/meta/meta_view.dart' as _i9;
 import 'package:posthub/Ui/Splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 
 class Routes {
   static const splashView = '/';
@@ -30,6 +32,10 @@ class Routes {
 
   static const addnewView = '/addnew-view';
 
+  static const googleView = '/google-view';
+
+  static const metaView = '/meta-view';
+
   static const all = <String>{
     splashView,
     homeView,
@@ -37,6 +43,8 @@ class Routes {
     dashBoardView,
     detailsView,
     addnewView,
+    googleView,
+    metaView,
   };
 }
 
@@ -66,6 +74,14 @@ class StackedRouter extends _i1.RouterBase {
       Routes.addnewView,
       page: _i7.AddnewView,
     ),
+    _i1.RouteDef(
+      Routes.googleView,
+      page: _i8.GoogleView,
+    ),
+    _i1.RouteDef(
+      Routes.metaView,
+      page: _i9.MetaView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
@@ -73,7 +89,7 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<SplashViewArguments>(
         orElse: () => const SplashViewArguments(),
       );
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => _i2.SplashView(key: args.key),
         settings: data,
       );
@@ -82,7 +98,7 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<HomeViewArguments>(
         orElse: () => const HomeViewArguments(),
       );
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => _i3.HomeView(key: args.key),
         settings: data,
       );
@@ -91,7 +107,7 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<LoginViewArguments>(
         orElse: () => const LoginViewArguments(),
       );
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => _i4.LoginView(key: args.key),
         settings: data,
       );
@@ -100,14 +116,14 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<DashBoardViewArguments>(
         orElse: () => const DashBoardViewArguments(),
       );
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => _i5.DashBoardView(key: args.key),
         settings: data,
       );
     },
     _i6.DetailsView: (data) {
       final args = data.getArgs<DetailsViewArguments>(nullOk: false);
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => _i6.DetailsView(post: args.post),
         settings: data,
       );
@@ -116,8 +132,26 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<AddnewViewArguments>(
         orElse: () => const AddnewViewArguments(),
       );
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i10.MaterialPageRoute<dynamic>(
         builder: (context) => _i7.AddnewView(key: args.key),
+        settings: data,
+      );
+    },
+    _i8.GoogleView: (data) {
+      final args = data.getArgs<GoogleViewArguments>(
+        orElse: () => const GoogleViewArguments(),
+      );
+      return _i10.MaterialPageRoute<dynamic>(
+        builder: (context) => _i8.GoogleView(key: args.key),
+        settings: data,
+      );
+    },
+    _i9.MetaView: (data) {
+      final args = data.getArgs<MetaViewArguments>(
+        orElse: () => const MetaViewArguments(),
+      );
+      return _i10.MaterialPageRoute<dynamic>(
+        builder: (context) => _i9.MetaView(key: args.key),
         settings: data,
       );
     },
@@ -133,7 +167,7 @@ class StackedRouter extends _i1.RouterBase {
 class SplashViewArguments {
   const SplashViewArguments({this.key});
 
-  final _i8.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -155,7 +189,7 @@ class SplashViewArguments {
 class HomeViewArguments {
   const HomeViewArguments({this.key});
 
-  final _i8.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -177,7 +211,7 @@ class HomeViewArguments {
 class LoginViewArguments {
   const LoginViewArguments({this.key});
 
-  final _i8.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -199,7 +233,7 @@ class LoginViewArguments {
 class DashBoardViewArguments {
   const DashBoardViewArguments({this.key});
 
-  final _i8.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -221,7 +255,7 @@ class DashBoardViewArguments {
 class DetailsViewArguments {
   const DetailsViewArguments({required this.post});
 
-  final _i9.Post post;
+  final _i11.Post post;
 
   @override
   String toString() {
@@ -243,7 +277,7 @@ class DetailsViewArguments {
 class AddnewViewArguments {
   const AddnewViewArguments({this.key});
 
-  final _i8.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -262,9 +296,53 @@ class AddnewViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+class GoogleViewArguments {
+  const GoogleViewArguments({this.key});
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant GoogleViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
+}
+
+class MetaViewArguments {
+  const MetaViewArguments({this.key});
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant MetaViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToSplashView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -280,7 +358,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToHomeView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -296,7 +374,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToLoginView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -312,7 +390,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToDashBoardView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -328,7 +406,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToDetailsView({
-    required _i9.Post post,
+    required _i11.Post post,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -344,7 +422,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToAddnewView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -359,8 +437,40 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToGoogleView({
+    _i10.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.googleView,
+        arguments: GoogleViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToMetaView({
+    _i10.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.metaView,
+        arguments: MetaViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithSplashView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -376,7 +486,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithHomeView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -392,7 +502,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithLoginView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -408,7 +518,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithDashBoardView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -424,7 +534,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithDetailsView({
-    required _i9.Post post,
+    required _i11.Post post,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -440,7 +550,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithAddnewView({
-    _i8.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -449,6 +559,38 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.addnewView,
         arguments: AddnewViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithGoogleView({
+    _i10.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.googleView,
+        arguments: GoogleViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithMetaView({
+    _i10.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.metaView,
+        arguments: MetaViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

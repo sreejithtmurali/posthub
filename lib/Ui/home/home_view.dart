@@ -134,8 +134,7 @@ class HomeView extends StatelessWidget {
                                                       bottom: 1),
                                                   child: Text(
                                                     "New",
-                                                    style: CustomTextStyles
-                                                        .titleMediumGray50,
+                                                    style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.white),
                                                   ),
                                                 ),
                                               ),
@@ -146,37 +145,55 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 110,
+                                    width: 10,
                                   ),
                                   Expanded(
                                     child: Container(
-                                      child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8),
-                                          child: CarouselSlider.builder(
-                                              options: CarouselOptions(
-                                                  height: 150,
-                                                  initialPage: 0,
-                                                  autoPlay: true,
-                                                  viewportFraction: 1.0,
-                                                  enableInfiniteScroll: false,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  onPageChanged:
-                                                      (index, reason) {
-                                                    sliderIndex = index;
-                                                  }),
-                                              itemCount: viewModel.postlist.length??2,
-                                              itemBuilder:
-                                                  (context, index, realIndex) {
-                                                return Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  image:DecorationImage(image: NetworkImage("${viewModel.postlist[index].url}"))
-                                                ),
+                                      height: 200,
+                                      child: CarouselSlider.builder(
+                                          options: CarouselOptions(
+                                              aspectRatio :16 / 16,
+                                              height: 200,
+                                              initialPage: 0,
+                                              autoPlay: true,
+                                              viewportFraction: 1.0,
+                                              enableInfiniteScroll: true,
+                                              scrollDirection:
+                                                  Axis.horizontal,
+                                              onPageChanged:
+                                                  (index, reason) {
+                                                sliderIndex = index;
+                                              }),
+                                          itemCount: viewModel.postlist.length??2,
+                                          itemBuilder:
+                                              (context, index, realIndex) {
 
-                                                );
-                                              })),
+                                            return viewModel.postlist.length==0?Container(
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                                                    color: Colors.blueGrey
+                                                )
+                                                ,child: Center(child: SvgPicture.asset(
+                                              "assets/images/img_group_2.svg",
+                                              height: 51.v,
+                                              width: 100.h,
+                                              fit: BoxFit.fill,)
+
+
+                                            ),
+                                            ): Padding(
+                                              padding:  EdgeInsets.all(8.0),
+                                              child: Container(
+                                                height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                                image:DecorationImage(image: NetworkImage("${viewModel.postlist[index].url}"))
+                                              ),
+
+                                              ),
+                                            );
+                                          }),
                                     ),
                                   ),
                                 ],
@@ -191,7 +208,7 @@ class HomeView extends StatelessWidget {
                                             padding: EdgeInsets.only(
                                                 top: 2, bottom: 3),
                                             child: Text(
-                                                "${sliderIndex + 1}/2 Campaigns",
+                                                "${sliderIndex + 1}/${viewModel.postlist.length} Campaigns",
                                                 style: theme
                                                     .textTheme.labelLarge)),
                                         Container(
@@ -199,7 +216,7 @@ class HomeView extends StatelessWidget {
                                             margin: EdgeInsets.only(left: 59),
                                             child: AnimatedSmoothIndicator(
                                                 activeIndex: sliderIndex,
-                                                count: 2,
+                                                count: viewModel.postlist.length,
                                                 effect: ScrollingDotsEffect(
                                                     spacing: 8,
                                                     activeDotColor: theme
@@ -235,13 +252,22 @@ class HomeView extends StatelessWidget {
                                           height: 364,
                                           child: Column(
                                             children: [
-                                              Image.network(
-                                                "${viewModel.postlist[index].url}",
+                                              Container(
+                                                height: 336,
+                                                width: MediaQuery.of(context).size.width-20,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(20),
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(
+                                                      "${viewModel.postlist[index].url}"),
 
-                                                  height: 336,
-                                                  width: 328,
-                                                fit: BoxFit.fill,
-                                                 ),
+
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  )
+                                                ),
+
+
                                               SizedBox(height: 8),
                                               Container(
                                                 height: 20,
@@ -264,8 +290,8 @@ class HomeView extends StatelessWidget {
                                                                       bottom:
                                                                           2),
                                                               decoration: BoxDecoration(
-                                                                  color: appTheme
-                                                                      .redA700,
+                                                                  color: viewModel.postlist[index].rejected?appTheme
+                                                                      .redA700:appTheme.blueGray10001,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -275,23 +301,41 @@ class HomeView extends StatelessWidget {
                                                                   .only(
                                                                       left:
                                                                           8),
-                                                              child: RichText(
+                                                              child:
+                                                              viewModel.postlist[index].rejected?RichText(
                                                                   text: TextSpan(
                                                                       children: [
                                                                         TextSpan(
                                                                             text:
-                                                                                "Admin Rejected the post ",
+                                                                            "Admin Rejected the post ",
                                                                             style:
-                                                                                CustomTextStyles.labelLargeff161616),
+                                                                            CustomTextStyles.labelLargeff161616),
                                                                         TextSpan(
                                                                             text:
-                                                                                "Why?",
+                                                                            "Why?",
                                                                             style:
-                                                                                CustomTextStyles.labelLargeff161616Bold.copyWith(decoration: TextDecoration.underline))
+                                                                            CustomTextStyles.labelLargeff161616Bold.copyWith(decoration: TextDecoration.underline))
                                                                       ]),
                                                                   textAlign:
-                                                                      TextAlign
-                                                                          .left)),
+                                                                  TextAlign
+                                                                      .left):RichText(
+                                                                  text: TextSpan(
+                                                                      children: [
+                                                                        TextSpan(
+                                                                            text:
+                                                                            "Admin Approved the post ",
+                                                                            style:
+                                                                            CustomTextStyles.labelLargeff161616),
+                                                                        TextSpan(
+                                                                            text:
+                                                                            "Tap to view",
+                                                                            style:
+                                                                            CustomTextStyles.labelLargeff161616Bold.copyWith(decoration: TextDecoration.underline))
+                                                                      ]),
+                                                                  textAlign:
+                                                                  TextAlign
+                                                                      .left)
+                                                          ),
                                                           Spacer(),
                                                           InkWell(
                                                             onTap: (){
