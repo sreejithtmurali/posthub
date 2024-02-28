@@ -23,7 +23,7 @@ class SplashViewModel extends BaseViewModel {
       //   //Navigate to login
       // } else {
       //   // Navigate to home
-      email==null? navigationService.navigateTo(Routes.loginView): navigationService.navigateTo(Routes.dashBoardView);
+      email==null? navigationService.pushNamedAndRemoveUntil(Routes.loginView): navigationService.pushNamedAndRemoveUntil(Routes.dashBoardView);
       // }
     });
 

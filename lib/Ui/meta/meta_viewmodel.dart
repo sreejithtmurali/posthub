@@ -18,7 +18,7 @@ import '../../app/utils.dart';
 
 
 
-class HomeViewModel extends BaseViewModel {
+class MetaViewModel extends BaseViewModel {
 
   List<Post> postlist = [];
 
@@ -86,25 +86,27 @@ class HomeViewModel extends BaseViewModel {
       String totalviews= value['totalviews'];
       String moneyspent= value['moneyspent'];
 
+if(addcategory=="meta") {
+  Post p = Post(id: id,
+      caption: caption,
+      addcategory: addcategory,
+      discription: discription,
+      budget: budget,
+      startdate: startdate,
+      enddate: enddate,
+      location: location,
+      agestart: agestart,
+      ageend: ageend,
+      rejected: false,
+      gender: gender,
+      keywords: keywords,
+      url: url,
+      totalviews: totalviews,
+      moneyspent: moneyspent);
+  postlist.add(p);
+  notifyListeners();
+}
 
-
-      Post p = Post(id: id, caption: caption,
-          addcategory: addcategory,
-          discription:discription,
-          budget: budget,
-          startdate: startdate,
-          enddate: enddate,
-          location: location,
-          agestart: agestart,
-          ageend: ageend,
-          rejected: false,
-          gender: gender,
-          keywords:keywords,
-          url: url ,
-          totalviews: totalviews,
-          moneyspent :moneyspent);
-      postlist.add(p);
-      notifyListeners();
 
     });
 

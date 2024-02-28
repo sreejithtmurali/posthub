@@ -15,8 +15,8 @@ class CustomBottomBarState extends State<CustomBottomBar> {
 
   List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
-      icon: ImageConstant.imgIcRoundHome,
-      activeIcon: ImageConstant.imgIcRoundHome,
+      icon: ImageConstant.homeicon,
+      activeIcon: ImageConstant.homeicon,
       type: BottomBarEnum.Icroundhome,
     ),
     BottomMenuModel(
@@ -29,11 +29,6 @@ class CustomBottomBarState extends State<CustomBottomBar> {
       activeIcon: ImageConstant.imgVectorBlack900,
       type: BottomBarEnum.Vectorblack900,
     ),
-    BottomMenuModel(
-      icon: ImageConstant.imgVectorBlack90022x18,
-      activeIcon: ImageConstant.imgVectorBlack90022x18,
-      type: BottomBarEnum.Vectorblack90022x18,
-    )
   ];
 
   @override
@@ -66,15 +61,15 @@ class CustomBottomBarState extends State<CustomBottomBar> {
           return BottomNavigationBarItem(
             icon: CustomImageView(
               imagePath: bottomMenuList[index].icon,
-              height: 20.v,
-              width: 19.h,
-              color: appTheme.black900,
+              height: 24.v,
+              width: 24.h,
+              color: appTheme.blueGray100,
             ),
             activeIcon: CustomImageView(
               imagePath: bottomMenuList[index].activeIcon,
-              height: 32.v,
-              width: 64.h,
-              color: appTheme.blueGray5001,
+              height: 34.v,
+              width: 34.h,
+              color: appTheme.black900,
               radius: BorderRadius.circular(
                 16.h,
               ),
@@ -96,7 +91,6 @@ enum BottomBarEnum {
   Icroundhome,
   Vector,
   Vectorblack900,
-  Vectorblack90022x18,
 }
 
 class BottomMenuModel {

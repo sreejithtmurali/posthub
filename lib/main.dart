@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:posthub/app/size_utils.dart';
-import 'package:posthub/webservice/productprovider.dart';
-import 'package:provider/provider.dart';
+//import 'package:posthub/webservice/productprovider.dart';
+//import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 
@@ -12,6 +12,7 @@ import 'app/app.router.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+
   await Firebase.initializeApp(
     options: FirebaseOptions(
 
@@ -22,13 +23,8 @@ Future<void> main() async {
         storageBucket:"posthub-44ebb.appspot.com"
     ),
   );
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<ProductProvider>(create: (_) => ProductProvider()),
-
-    ],
-    child: MyApp(),
-  ));
+  runApp( MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,6 +33,7 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
        return MaterialApp(
+
          debugShowCheckedModeBanner: false,
           onGenerateRoute: StackedRouter().onGenerateRoute,
           navigatorKey: StackedService.navigatorKey,
